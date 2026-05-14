@@ -34,9 +34,3 @@ Each workflow uses a consistent four-layer stack:
 | **Connector** | Automation glue | Zapier |
 | **Data** | Input source | CRM exports, GA4, brand guidelines |
 
-## Built By
-
-**Francis Foo** - AI Transformation & GTM Leadership
-
-- [GitHub](https://github.com/Sevenninetwo)
-- [LinkedIn](https://linkedin.com/in/francisfoo)
