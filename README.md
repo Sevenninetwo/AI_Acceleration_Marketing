@@ -9,6 +9,8 @@ A practical reference of AI-powered workflows across the full marketing lifecycl
 
 An interactive table mapping 13 marketing workflows to specific AI solutions, tool stacks, and success metrics. Each workflow is categorised by marketing function (Strategy, Research, Content, Campaign, Demand Gen, Analytics, Governance) and can be filtered in the live page.
 
+Please let me know if there's anything you'd like added to the list! 
+
 ## Live Site
 
 👉 [View the live playbook](https://your-subdomain.netlify.app)
