@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marketing AI Acceleration Playbook</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #ffffff;
+    color: #1a1a2e;
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .header {
+    padding: 56px 56px 44px;
+    border-bottom: 1px solid #e5e7eb;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .header-left { max-width: 700px; }
+  .header-eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #6366f1;
+    margin-bottom: 12px;
+  }
+  h1 {
+    font-size: 36px;
+    font-weight: 700;
+    color: #111827;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+  .header-sub {
+    font-size: 16px;
+    color: #6b7280;
+    line-height: 1.7;
+    max-width: 640px;
+  }
+  .version-badge {
+    display: inline-block;
+    margin-top: 16px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: #6366f1;
+    background: #eef2ff;
+    border-radius: 20px;
+    padding: 5px 14px;
+  }
+
+  /* BRANDING */
+  .header-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    margin-left: 40px;
+  }
+  .brand-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: #f3f4f6;
+    border: 2px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 700;
+    color: #6366f1;
+    overflow: hidden;
+  }
+  .brand-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .brand-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+    text-align: center;
+    line-height: 1.3;
+  }
+  .brand-title {
+    font-size: 11px;
+    color: #9ca3af;
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  .controls {
+    padding: 24px 56px;
+    border-bottom: 1px solid #e5e7eb;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+  .filter-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #9ca3af;
+    margin-right: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .filter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    color: #6b7280;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .filter-btn:hover { background: #f3f4f6; border-color: #d1d5db; color: #374151; }
+  .filter-btn .dot { width: 8px; height: 8px; border-radius: 50%; }
+  .filter-btn.active { background: #111827; color: #ffffff; border-color: #111827; }
+  .filter-btn.active .dot { box-shadow: 0 0 0 2px rgba(255,255,255,0.4); }
+
+  .legend {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .legend-label { font-size: 12px; font-weight: 600; color: #9ca3af; text-transform: uppercase; letter-spacing: 1px; margin-right: 4px; }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #6b7280; }
+
+  main {
+    padding: 0 56px 80px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .table-header {
+    display: flex;
+    align-items: center;
+    padding: 28px 0 16px;
+  }
+  .table-title {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #9ca3af;
+  }
+  .count-badge {
+    display: inline-block;
+    background: #f3f4f6;
+    color: #6b7280;
+    border-radius: 20px;
+    padding: 3px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-left: 12px;
+  }
+
+  table { width: 100%; border-collapse: collapse; }
+
+  thead th {
+    text-align: left;
+    padding: 14px 20px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: #9ca3af;
+    border-bottom: 2px solid #e5e7eb;
+    background: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  tbody tr { border-bottom: 1px solid #f3f4f6; transition: background 0.1s; }
+  tbody tr:hover { background: #f9fafb; }
+  tbody tr.hidden { display: none; }
+  tbody td { padding: 24px 20px; vertical-align: top; }
+
+  .fn-pill {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+  .fn-strategy   { background: #eef2ff; color: #4f46e5; }
+  .fn-research   { background: #f5f3ff; color: #7c3aed; }
+  .fn-content    { background: #fdf2f8; color: #db2777; }
+  .fn-campaign   { background: #fffbeb; color: #b45309; }
+  .fn-demand     { background: #ecfdf5; color: #047857; }
+  .fn-analytics  { background: #ecfeff; color: #0e7490; }
+  .fn-governance { background: #fef2f2; color: #dc2626; }
+
+  .problem-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #111827;
+    line-height: 1.5;
+  }
+
+  /* SOLUTION - BULLETED */
+  .solution-wrap { font-size: 14px; color: #4b5563; line-height: 1.75; }
+  .solution-name {
+    font-weight: 600;
+    color: #111827;
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+  .solution-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .solution-bullets li {
+    padding-left: 16px;
+    position: relative;
+    margin-bottom: 4px;
+    font-size: 13px;
+    color: #4b5563;
+    line-height: 1.65;
+  }
+  .solution-bullets li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #d1d5db;
+  }
+
+  .loop-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #0e7490;
+    background: #ecfeff;
+    border-radius: 6px;
+    padding: 4px 10px;
+    margin-top: 10px;
+  }
+  .hitl-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #dc2626;
+    background: #fef2f2;
+    border-radius: 6px;
+    padding: 4px 10px;
+    margin-top: 10px;
+  }
+
+  .stack-group { margin-bottom: 10px; }
+  .stack-group:last-child { margin-bottom: 0; }
+  .stack-cat {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: #9ca3af;
+    margin-bottom: 5px;
+  }
+  .tag {
+    display: inline-block;
+    border-radius: 6px;
+    padding: 3px 10px;
+    font-size: 12px;
+    font-weight: 500;
+    margin: 2px 4px 2px 0;
+    white-space: nowrap;
+  }
+  .tag.brain     { background: #eef2ff; color: #4338ca; }
+  .tag.interface { background: #ecfeff; color: #0e7490; }
+  .tag.connector { background: #ecfdf5; color: #047857; }
+  .tag.data      { background: #fffbeb; color: #92400e; }
+
+  .metrics-group { display: flex; flex-direction: column; gap: 12px; }
+  .metric-block { padding-left: 12px; border-left: 3px solid #e5e7eb; }
+  .metric-type {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .metric-type.efficiency { color: #059669; }
+  .metric-type.performance { color: #4f46e5; }
+  .metric-block strong {
+    display: block;
+    color: #111827;
+    font-weight: 600;
+    font-size: 13px;
+    margin-bottom: 1px;
+  }
+  .metric-block span { color: #6b7280; font-size: 12px; }
+
+  .empty-state { display: none; text-align: center; padding: 80px; color: #9ca3af; font-size: 15px; }
+  .empty-state.visible { display: block; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <div class="header-eyebrow">AI Acceleration Playbook</div>
+    <h1>Marketing Workflows, Transformed by AI</h1>
+    <p class="header-sub">Practical tools and automations across the full marketing lifecycle - from predictive strategy through brand-safe execution. Text, visual, and video.</p>
+    <div class="version-badge">V2 - Governance, Predictive Intent, Visual Content & Closed-Loop Analytics</div>
+  </div>
+  <div class="header-brand">
+    <!-- Replace the "FX" below with an <img src="your-photo.jpg"> tag -->
+    <div class="brand-avatar">FX</div>
+    <div class="brand-name">Francis Foo</div>
+    <div class="brand-title">AI Transformation &<br>GTM Leadership</div>
+  </div>
+</div>
+
+<div class="controls">
+  <div class="filter-row">
+    <span class="filter-label">Filter</span>
+    <button class="filter-btn active" onclick="filterStage('all', this)">All</button>
+    <button class="filter-btn" onclick="filterStage('strategy', this)"><span class="dot" style="background:#4f46e5"></span>Strategy</button>
+    <button class="filter-btn" onclick="filterStage('research', this)"><span class="dot" style="background:#7c3aed"></span>Research</button>
+    <button class="filter-btn" onclick="filterStage('content', this)"><span class="dot" style="background:#db2777"></span>Content</button>
+    <button class="filter-btn" onclick="filterStage('campaign', this)"><span class="dot" style="background:#b45309"></span>Campaign</button>
+    <button class="filter-btn" onclick="filterStage('demand', this)"><span class="dot" style="background:#047857"></span>Demand Gen</button>
+    <button class="filter-btn" onclick="filterStage('analytics', this)"><span class="dot" style="background:#0e7490"></span>Analytics</button>
+    <button class="filter-btn" onclick="filterStage('governance', this)"><span class="dot" style="background:#dc2626"></span>Governance</button>
+  </div>
+  <div class="legend">
+    <span class="legend-label">Stack</span>
+    <div class="legend-item"><span class="tag brain">Brain</span> AI reasoning</div>
+    <div class="legend-item"><span class="tag interface">Interface</span> Output destination</div>
+    <div class="legend-item"><span class="tag connector">Connector</span> Automation glue</div>
+    <div class="legend-item"><span class="tag data">Data</span> Input source</div>
+  </div>
+</div>
+
+<main>
+  <div class="table-header">
+    <span class="table-title">Workflows</span>
+    <span class="count-badge" id="countBadge">13 workflows</span>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width:11%">Function</th>
+        <th style="width:17%">Problem</th>
+        <th style="width:27%">AI Solution</th>
+        <th style="width:25%">Tool Stack</th>
+        <th style="width:20%">Success Metrics</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody">
+
+      <tr data-stage="strategy">
+        <td><span class="fn-pill fn-strategy">Strategy</span></td>
+        <td><div class="problem-title">Campaign briefs take too long and lack real audience insight</div></td>
+        <td>
+          <div class="solution-wrap">
+            <div class="solution-name">Campaign Brief Generator</div>
+            <ul class="solution-bullets">
+              <li>Input target audience, goal, and budget into a structured Claude prompt</li>
+              <li>Claude outputs a full brief: messaging angles, channel mix, content themes, and KPIs</li>
+              <li>Compresses a full day of cross-functional meetings into 10 minutes</li>
+            </ul>
+          </div>
+        </td>
+        <td>
+          <div class="stack-group"><div class="stack-cat">Brain</div><span class="tag brain">Claude.ai</span></div>
+          <div class="stack-group"><div class="stack-cat">Interface</div><span class="tag interface">Notion</span><span class="tag interface">Google Docs</span></div>
+          <div class="stack-group"><div class="stack-cat">Connector</div><span class="tag connector">Manual (to start)</span></div>
+          <div class="stack-group"><div class="stack-cat">Data</div><span class="tag data">ICP definition</span><span class="tag data">Past campaign results</span></div>
+        </td>
+        <td>
+          <div class="metrics-group">
+            <div class="metric-block"><div class="metric-type efficiency">Efficiency</div><strong>Brief cycle time</strong><span>Days from request to approved brief</span></div>
+            <div class="metric-block"><div class="metric-type performance">Performance</div><strong>Campaign launch velocity</strong><span>Campaigns shipped per quarter</span></div>
+          </div>
+        </td>
+      </tr>
+
+      <tr data-stage="strategy">
+        <td><span class="fn-pill fn-strategy">Strategy</span></td>
+        <td><div class="problem-title">Audience segmentation is based on gut feel, not behaviour</div></td>
+        <td>
+          <div class="solution-wrap">
+            <div class="solution-name">Segmentation Analyzer</div>
+            <ul class="solution-bullets">
+              <li>Export CRM contact activity and engagement signals (email opens/clicks, page visits, content downloads, form fills, product usage) into Claude</li>
+              <li>Claude clusters behavioural patterns and proposes 4-6 named segments</li>
+              <li>Each segment gets a distinct messaging strategy and channel recommendation</li>
+            </ul>
+          </div>
+        </td>
+        <td>
+          <div class="stack-group"><div class="stack-cat">Brain</div><span class="tag brain">Claude API</span></div>
+          <div class="stack-group"><div class="stack-cat">Interface</div><span class="tag interface">Google Sheets</span><span class="tag interface">Notion</span></div>
+          <div class="stack-group"><div class="stack-cat">Connector</div><span class="tag connector">Zapier</span></div>
+          <div class="stack-group"><div class="stack-cat">Data</div><span class="tag data">HubSpot / SFDC</span><span class="tag data">Email + web analytics</span></div>
+        </td>
+        <td>
+          <div class="metrics-group">
+            <div class="metric-block"><div class="metric-type efficiency">Efficiency</div><strong>Cost per segment model</strong><span>Analyst hours saved vs. manual segmentation</span></div>
+            <div class="metric-block"><div class="metric-type performance">Performance</div><strong>Segment conversion rate</strong><span>% lift vs. unsegmented baseline</span></div>
+          </div>
+        </td>
+      </tr>
+
+      <tr data-stage="strategy">
+        <td><span class="fn-pill fn-strategy">Strategy</span></td>
+        <td><div class="problem-title">Campaigns launch blind - no signal on which accounts are ready to buy</div></td>
+        <td>
+          <div class="solution-wrap">
+            <div class="solution-name">Predictive Intent Engine</div>
+            <ul class="solution-bullets">
+              <li>Pull topic-level surge scores from Bombora (which companies are researching your category) and G2 Buyer Intent (who's reading your reviews and comparing you to competitors)</li>
+              <li>Cross-reference intent signals against ICP firmographics from Clearbit or ZoomInfo (industry, headcount, revenue, tech stack)</li>
+              <li>Claude ranks accounts by combined intent + ICP fit score - campaigns start targeted, not broadcast</li>
+            </ul>
+          </div>
+        </td>
+        <td>
+          <div class="stack-group"><div class="stack-cat">Brain</div><span class="tag brain">Claude API</span></div>
+          <div class="stack-group"><div class="stack-cat">Interface</div><span class="tag interface">Google Sheets</span><span class="tag interface">Salesforce</span></div>
+          <div class="stack-group"><div class="stack-cat">Connector</div><span class="tag connector">Zapier</span></div>
+          <div class="stack-group"><div class="stack-cat">Data</div><span class="tag data">Bombora surge reports</span><span class="tag data">G2 Buyer Intent</span><span class="tag data">Clearbit / ZoomInfo</span></div>
+        </td>
+        <td>
+          <div class="metrics-group">
+            <div class="metric-block"><div class="metric-type efficiency">Efficiency</div><strong>Cost per predicted account</strong><span>Vs. broad-spray campaign spend</span></div>
+            <div class="metric-block"><div class="metric-type performance">Performance</div><strong>Intent-to-pipeline rate</strong><span>% of flagged accounts entering pipeline in 60 days</span></div>
+          </div>
+        </td>
+      </tr>
+
+      <tr data-stage="research">
+        <td><span class="fn-pill fn-research">Research</span></td>
+        <td><div class="problem-title">Competitive monitoring is manual, reactive, and always late</div></td>
+        <td>
+          <div class="solution-wrap">
+            <div class="solution-name">Weekly Competitive Digest</div>
+            <ul class="solution-bullets">
+              <li>Zapier triggers a weekly Perplexity search for each competitor (news, product launches, pricing changes, "[competitor] hiring site:linkedin.com")</li>
+              <li>Perplexity handles the web search layer since LinkedIn is publicly indexed by Google even though direct scraping is blocked</li>
+              <li>Search results are piped to Claude, which interprets hiring patterns, identifies strategic signals, and writes a ranked digest</li>
+              <li>Delivered to Slack every Monday - Perplexity finds, Claude thinks</li>
+            </ul>
+          </div>
+        </td>
+        <td>
+          <div class="stack-group"><div class="stack-cat">Brain</div><span class="tag brain">Claude API</span><span class="tag brain">Perplexity</span></div>
+          <div class="stack-group"><div class="stack-cat">Interface</div><span class="tag interface">Slack</span><span class="tag interface">Notion</span></div>
+          <div class="stack-group"><div class="stack-cat">Connector</div><span class="tag connector">Zapier</span></div>
+          <div class="stack-group"><div class="stack-cat">Data</div><span class="tag data">Competitor URLs</span><span class="tag data">Public job listings</span></div>
+        </td>
+        <td>
+          <div class="metrics-group">
+            <div class="metric-block"><div class="metric-type efficiency">Efficiency</div><strong>Research hours saved</strong><span>Hours/week reclaimed from manual monitoring</span></div>
+            <div class="metric-block"><div class="metric-type performance">Performance</div><strong>Counter-messaging rate</strong><span>% of signals that trigger a campaign response</span></div>
+          </div>
+        </td>
+      </tr>
+
+      <tr data-stage="content">
+        <td><span class="fn-pill fn-content">Content</span></td>
+        <td><div class="problem-title">Written content is slow - one piece takes days and doesn't repurpose</div></td>
+        <td>
+          <div class="solution-wrap">
+            <div class="solution-name">Text Content Multiplier</div>
+            <ul class="solution-bullets">
+              <li>Feed Claude one approved blog post and brand voice guidelines</li>
+              <li>Outputs 3 LinkedIn variants, 5 tweet/X formats, a short-form email snippet, and a TL;DR for internal Slack</li>
+              <li>One source piece becomes 10 text assets in 15 minutes</li>
+            </ul>
+          </div>
+        </td>
+        <td>
+          <div class="stack-group"><div class="stack-cat">Brain</div><span class="tag brain">Claude.ai</span></div>
+          <div class="stack-group"><div class="stack-cat">Interface</div><span class="tag interface">Notion</span><span class="tag interface">Buffer</span></div>
+          <div class="stack-group"><div class="stack-cat">Connector</div><span class="tag connector">Zapier</span></div>
+          <div class="stack-group"><div class="stack-cat">Data</div><span class="tag data">Brand voice guide</span><span class="tag data">Source content</span></div>
+        </td>
+        <td>
+          <div class="metrics-group">
+            <div class="metric-block"><div class="metric-type efficiency">Efficiency</div><strong>Cost per asset</strong><span>$ per publish-ready piece vs. agency rate</span></div>
+            <div class="metric-block"><div class="metric-type performance">Performance</div><strong>Content output ratio</strong><span>Assets produced per source piece</span></div>
+          </div>
+        </td>
+      </tr>
+
+      <tr data-stage="content">
+        <td><span class="fn-pill fn-content">Content</span></td>
+        <td><div class="problem-title">Visual and video content for IG, TikTok, and Reels is a bottleneck</div></td>
+        <td>
+          <div class="solution-wrap">
+            <div class="solution-name">Visual Content Pipeline</div>
+            <ul class="solution-bullets">
+              <li>Claude generates copy, captions, and creative direction from a campaign brief</li>
+              <li>Output feeds into Figma templates (static posts, carousels, stories) and CapCut (short-form video with auto-captions)</li>
+              <li>Midjourney generates custom imagery when stock won't cut it</li>
+              <li>One brief produces a full week of visual assets across IG, TikTok, and LinkedIn</li>
+            </ul>
+          </div>
+        </td>
+        <td>
+          <div class="stack-group"><div class="stack-cat">Brain</div><span class="tag brain">Claude API</span><span class="tag brain">Midjourney</span></div>
+          <div class="stack-group"><div class="stack-cat">Interface</div><span class="tag interface">Figma</span><span class="tag interface">CapCut</span><span class="tag interface">Canva</span></div>
+          <div class="stack-group"><div class="stack-cat">Connector</div><span class="tag connector">Zapier</span></div>
+          <div class="stack-group"><div class="stack-cat">Data</div><span class="tag data">Brand kit</span><span class="tag data">Campaign brief</span><span class="tag data">Asset library</span></div>
+        </td>
+        <td>
+          <div class="metrics-group">
+            <div class="metric-block"><div class="metric-type efficiency">Efficiency</div><strong>Design hours per post</strong><span>Time from brief to publish-ready visual</span></div>
+            <div class="metric-block"><div class="metric-type performance">Performance</div><strong>Social engagement rate</strong><span>Avg likes + shares + saves per post</span></div>
+          </div>
+        </td>
+      </tr>
+
+      <tr data-stage="content">
+        <td><span class="fn-pill fn-content">Content</span></td>
+        <td><div class="problem-title">SEO content loses relevance before it ranks</div></td>
+        <td>
+          <div class="solution-wrap">
+            <div class="solution-name">Dynamic SEO Pipeline</div>
+            <ul class="solution-bullets">
+              <li>Live SERP (Search Engine Results Page) webhook triggers Claude when a tracked keyword shifts rank</li>
+              <li>Claude identifies the content gap, rewrites or updates the post</li>
+              <li>Pushes a draft for human review - reacts to SERP changes in hours, not weeks</li>
+            </ul>
+          </div>
+        </td>
+        <td>
+          <div class="stack-group"><div class="stack-cat">Brain</div><span class="tag brain">Claude API</span></div>
+          <div class="stack-group"><div class="stack-cat">Interface</div><span class="tag interface">Google Docs</span><span class="tag interface">Surfer SEO</span></div>
+          <div class="stack-group"><div class="stack-cat">Connector</div><span class="tag connector">Zapier</span></div>
+          <div class="stack-group"><div class="stack-cat">Data</div><span class="tag data">Semrush SERP feed</span><span class="tag data">Keyword tracker</span></div>
+        </td>
+        <td>
+          <div class="metrics-group">
+            <div class="metric-block"><div class="metric-type efficiency">Efficiency</div><strong>Update cycle time</strong><span>Hours from rank drop to updated draft</span></div>
+            <div class="metric-block"><div class="metric-type performance">Performance</div><strong>Organic rank position</strong><span>Avg position for tracked keywords</span></div>
+          </div>
+        </td>
+      </tr>
+
+      <tr data-stage="campaign">
+        <td><span class="fn-pill fn-campaign">Campaign</span></td>
+        <td><div class="problem-title">Email personalisation doesn't scale beyond first name</div></td>
+        <td>
+          <div class="solution-wrap">
+            <div class="solution-name">Segment-Level Email Personaliser</div>
+            <ul class="solution-bullets">
+              <li>Define 4-5 audience segments in a structured prompt</li>
+              <li>Claude generates distinct email variants per segment from a single core message</li>
+              <li>Each gets a tailored subject line, opening hook, and CTA</li>
+              <li>Pushed into Marketo or HubSpot as separate versions</li>
+            </ul>
+          </div>
+        </td>
+        <td>
+          <div class="stack-group"><div class="stack-cat">Brain</div><span class="tag brain">Claude API</span></div>
+          <div class="stack-group"><div class="stack-cat">Interface</div><span class="tag interface">Marketo</span><span class="tag interface">HubSpot</span></div>
+          <div class="stack-group"><div class="stack-cat">Connector</div><span class="tag connector">Zapier</span></div>
+          <div class="stack-group"><div class="stack-cat">Data</div><span class="tag data">Segment definitions</span><span class="tag data">CRM tags</span></div>
+        </td>
+        <td>
+          <div class="metrics-group">
+            <div class="metric-block"><div class="metric-type efficiency">Efficiency</div><strong>Cost per email variant</strong><span>$ vs. copywriter rate per version</span></div>
+            <div class="metric-block"><div class="metric-type performance">Performance</div><strong>CTR by segment</strong><span>Vs. generic single-version baseline</span></div>
+          </div>
+        </td>
+      </tr>
+
+      <tr data-stage="campaign">
+        <td><span class="fn-pill fn-campaign">Campaign</span></td>
+        <td><div class="problem-title">Ad copy testing is too slow - teams ship 3 variants when they need 20</div></td>
+        <td>
+          <div class="solution-wrap">
+            <div class="solution-name">Ad Copy Factory</div>
+            <ul class="solution-bullets">
+              <li>Input product, audience, and objective</li>
+              <li>Claude generates 15+ variants across headline, body, and CTA combinations</li>
+              <li>Scored against historical CTR patterns via a second Claude prompt</li>
+              <li>Top performers pushed into Google or Meta Ads via API</li>
+            </ul>
+          </div>
+        </td>
+        <td>
+          <div class="stack-group"><div class="stack-cat">Brain</div><span class="tag brain">Claude API</span></div>
+          <div class="stack-group"><div class="stack-cat">Interface</div><span class="tag interface">Google Ads</span><span class="tag interface">Meta Ads</span></div>
+          <div class="stack-group"><div class="stack-cat">Connector</div><span class="tag connector">Zapier</span></div>
+          <div class="stack-group"><div class="stack-cat">Data</div><span class="tag data">Past ad performance</span><span class="tag data">Audience profile</span></div>
+        </td>
+        <td>
+          <div class="metrics-group">
+            <div class="metric-block"><div class="metric-type efficiency">Efficiency</div><strong>Copy output speed</strong><span>Variants per brief per hour</span></div>
+            <div class="metric-block"><div class="metric-type performance">Performance</div><strong>Ad CTR lift</strong><span>AI vs. human variant win rate</span></div>
+          </div>
+        </td>
+      </tr>
+
+      <tr data-stage="campaign">
+        <td><span class="fn-pill fn-campaign">Campaign</span></td>
+        <td><div class="problem-title">No proof that AI creative outperforms human creative</div></td>
+        <td>
+          <div class="solution-wrap">
+            <div class="solution-name">Champion-Challenger Framework</div>
+            <ul class="solution-bullets">
+              <li>Every campaign runs a structured A/B split: human control vs. AI challenger</li>
+              <li>Results feed a live scorecard tracking win rates by channel, segment, and message type</li>
+              <li>Over 90 days, builds the statistical evidence base for further AI investment</li>
+            </ul>
+          </div>
+        </td>
+        <td>
+          <div class="stack-group"><div class="stack-cat">Brain</div><span class="tag brain">Claude API</span></div>
+          <div class="stack-group"><div class="stack-cat">Interface</div><span class="tag interface">Google Sheets</span><span class="tag interface">Notion</span></div>
+          <div class="stack-group"><div class="stack-cat">Connector</div><span class="tag connector">Zapier</span></div>
+          <div class="stack-group"><div class="stack-cat">Data</div><span class="tag data">Campaign exports</span><span class="tag data">A/B test results</span></div>
+        </td>
+        <td>
+          <div class="metrics-group">
+            <div class="metric-block"><div class="metric-type efficiency">Efficiency</div><strong>Test setup time</strong><span>Hours to stand up a challenger variant</span></div>
+            <div class="metric-block"><div class="metric-type performance">Performance</div><strong>AI win rate</strong><span>% of tests where AI beats human control</span></div>
+          </div>
+        </td>
+      </tr>
+
+      <tr data-stage="demand">
+        <td><span class="fn-pill fn-demand">Demand Gen</span></td>
+        <td><div class="problem-title">Lead nurture sequences are generic and bleed MQLs</div></td>
+        <td>
+          <div class="solution-wrap">
+            <div class="solution-name">Behaviour-Triggered Nurture Writer</div>
+            <ul class="solution-bullets">
+              <li>When a lead engages with specific content (pricing page, case study, webinar), a Zapier trigger fires</li>
+              <li>Claude generates a 3-email follow-up tailored to that intent signal and buying stage</li>
+              <li>Different sequences per signal, auto-enrolled in Marketo</li>
+            </ul>
+          </div>
+        </td>
+        <td>
+          <div class="stack-group"><div class="stack-cat">Brain</div><span class="tag brain">Claude API</span></div>
+          <div class="stack-group"><div class="stack-cat">Interface</div><span class="tag interface">Marketo</span><span class="tag interface">HubSpot</span></div>
+          <div class="stack-group"><div class="stack-cat">Connector</div><span class="tag connector">Zapier</span></div>
+          <div class="stack-group"><div class="stack-cat">Data</div><span class="tag data">Lead behaviour events</span><span class="tag data">Content taxonomy</span></div>
+        </td>
+        <td>
+          <div class="metrics-group">
+            <div class="metric-block"><div class="metric-type efficiency">Efficiency</div><strong>Cost per MQL</strong><span>$ per qualified lead via AI sequences</span></div>
+            <div class="metric-block"><div class="metric-type performance">Performance</div><strong>MQL-to-SQL rate</strong><span>% of nurtured leads accepted by sales</span></div>
+          </div>
+        </td>
+      </tr>
+
+      <tr data-stage="analytics">
+        <td><span class="fn-pill fn-analytics">Analytics</span></td>
+        <td><div class="problem-title">Performance data never feeds back to improve the next campaign</div></td>
+        <td>
+          <div class="solution-wrap">
+            <div class="solution-name">Closed-Loop Performance Digest</div>
+            <ul class="solution-bullets">
+              <li>Zapier pulls weekly CSV exports from GA4 (via Data API), HubSpot, and Google/Meta Ads into a single Google Sheet</li>
+              <li>A second Zap sends the consolidated data to Claude API</li>
+              <li>Claude writes a plain-English summary: what moved, why, and one recommended action</li>
+              <li>Insights auto-update the Strategy prompt library so the next brief is smarter</li>
+            </ul>
+            <div class="loop-badge">&#8629; Feeds back to Strategy prompts</div>
+          </div>
+        </td>
+        <td>
+          <div class="stack-group"><div class="stack-cat">Brain</div><span class="tag brain">Claude API</span></div>
+          <div class="stack-group"><div class="stack-cat">Interface</div><span class="tag interface">Slack</span><span class="tag interface">Notion</span></div>
+          <div class="stack-group"><div class="stack-cat">Connector</div><span class="tag connector">Zapier</span></div>
+          <div class="stack-group"><div class="stack-cat">Data</div><span class="tag data">GA4 Data API</span><span class="tag data">HubSpot API</span><span class="tag data">Ads API exports</span></div>
+        </td>
+        <td>
+          <div class="metrics-group">
+            <div class="metric-block"><div class="metric-type efficiency">Efficiency</div><strong>Reporting time saved</strong><span>Hours/week reclaimed</span></div>
+            <div class="metric-block"><div class="metric-type performance">Performance</div><strong>Insight action rate</strong><span>% of recommendations acted on in 7 days</span></div>
+          </div>
+        </td>
+      </tr>
+
+      <tr data-stage="governance">
+        <td><span class="fn-pill fn-governance">Governance</span></td>
+        <td><div class="problem-title">AI content ships without legal, brand, or data safety checks</div></td>
+        <td>
+          <div class="solution-wrap">
+            <div class="solution-name">HITL Checkpoint Layer</div>
+            <ul class="solution-bullets">
+              <li>Every AI output above a defined risk threshold (public copy, customer data, regulated claims) routes to a mandatory Notion review queue</li>
+              <li>Slack approval flow notifies the reviewer and tracks turnaround time</li>
+              <li>A separate PII-scrubbing prompt strips identifiable data from CRM exports before they touch any external LLM</li>
+            </ul>
+            <div class="hitl-badge">&#9888; HITL required before external publish</div>
+          </div>
+        </td>
+        <td>
+          <div class="stack-group"><div class="stack-cat">Brain</div><span class="tag brain">Claude API</span></div>
+          <div class="stack-group"><div class="stack-cat">Interface</div><span class="tag interface">Notion queue</span><span class="tag interface">Slack approval</span></div>
+          <div class="stack-group"><div class="stack-cat">Connector</div><span class="tag connector">Zapier</span></div>
+          <div class="stack-group"><div class="stack-cat">Data</div><span class="tag data">Brand guidelines</span><span class="tag data">Legal taxonomy</span><span class="tag data">PII rules</span></div>
+        </td>
+        <td>
+          <div class="metrics-group">
+            <div class="metric-block"><div class="metric-type efficiency">Efficiency</div><strong>Review turnaround</strong><span>Hours from AI output to approved status</span></div>
+            <div class="metric-block"><div class="metric-type performance">Performance</div><strong>Brand incident rate</strong><span>Violations per 100 AI outputs</span></div>
+          </div>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+  <div class="empty-state" id="emptyState">No workflows match this filter.</div>
+</main>
+
+<script>
+  function filterStage(stage, clickedBtn) {
+    document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+    clickedBtn.classList.add('active');
+    const rows = document.querySelectorAll('#tableBody tr');
+    let visible = 0;
+    rows.forEach(row => {
+      const match = stage === 'all' || row.dataset.stage === stage;
+      row.classList.toggle('hidden', !match);
+      if (match) visible++;
+    });
+    document.getElementById('emptyState').classList.toggle('visible', visible === 0);
+    document.getElementById('countBadge').textContent = visible + (visible === 1 ? ' workflow' : ' workflows');
+  }
+</script>
+</body>
+</html>
