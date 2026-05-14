@@ -13,7 +13,7 @@ Please let me know if there's anything you'd like added to the list!
 
 ## Live Site
 
-👉 [View the live playbook](https://your-subdomain.netlify.app)
+👉 [View the live playbook](https://ai-acceleration-marketing.netlify.app/)
 
 ## Workflows Covered
 
